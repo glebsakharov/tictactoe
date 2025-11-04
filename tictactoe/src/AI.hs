@@ -7,7 +7,7 @@ import Data.Tuple(swap)
 
 import Logic 
 
--- The entire gametree given a board
+-- The entire gametree given starting at Board
 data GameTree = Node Board [(Path,GameTree)]
 		deriving (Show, Eq)
 
