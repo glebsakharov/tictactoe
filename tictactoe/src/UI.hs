@@ -17,7 +17,7 @@ background = white
 fps :: Int
 fps = 30
 
--- | Start the game
+-- Start the game
 runGame :: IO ()
 runGame = play
   window
@@ -29,7 +29,7 @@ runGame = play
   (\_ b -> b)         -- no time-based updates
 
 
--- | Draw the current game board
+--  Draw the current game board
 drawBoard :: Board -> Picture
 drawBoard board =
   Pictures [drawGrid, drawPieces board, statusText]
@@ -55,21 +55,21 @@ drawGrid = color black $
            ]
 
 
--- | Draws all pieces on the board
+--  Draws all pieces on the board
 drawPieces :: Board -> Picture
 drawPieces board = Pictures
   [ translate (fromIntegral (c * 100 - 100)) (fromIntegral (100 - r * 100)) (drawPiece p)
   | r <- [0..2], c <- [0..2], let p = getPiece board (r, c), p /= Empty ]
 
 
--- | Draws X or O
+--  Draws X or O
 drawPiece :: Piece -> Picture
 drawPiece X = color blue  $ scale 0.3 0.3 $ Text "X"
 drawPiece O = color red   $ scale 0.3 0.3 $ Text "O"
 drawPiece _ = Blank
 
 
--- | Convert mouse click coordinates to a board action
+--  Convert mouse click coordinates to a board action
 coordsToAction :: (Float, Float) -> Maybe Action
 coordsToAction (x, y)
   | abs x > 150 || abs y > 150 = Nothing
@@ -79,7 +79,7 @@ coordsToAction (x, y)
     row = 2 - floor ((y + 150) / 100)
 
 
--- | Handle mouse clicks (player + AI)
+--  Handle mouse clicks (player + AI)
 handleEvent :: Event -> Board -> Board
 handleEvent (EventKey (MouseButton LeftButton) Up _ (x, y)) board
   | terminal board = board  -- do nothing if game is over
@@ -102,7 +102,7 @@ handleEvent (EventKey (MouseButton LeftButton) Up _ (x, y)) board
 handleEvent _ board = board
 
 
--- | Retrieve piece from a coordinate (row, col)
+--  Retrieve piece from a coordinate (row, col)
 getPiece :: Board -> (Int, Int) -> Piece
 getPiece board (r, c) = (board !! r) !! c
 
