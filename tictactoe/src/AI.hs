@@ -22,7 +22,10 @@ lazy buildTree
 -}
 
 buildTree :: Board -> Path -> GameTree 
-buildTree board currentPath = Node board [(newPath, buildTree b' newPath) | action <- actions board, Just b' <- [result board action], let newPath = buildPath currentPath action]
+buildTree board currentPath = Node board [(newPath, buildTree b' newPath) 
+										  | action <- actions board, 
+										    Just b' <- [result board action], 
+											let newPath = buildPath currentPath action]
 			
 buildPath :: Path -> Action -> Path
 buildPath path act = NodePath (Just act) newState path
