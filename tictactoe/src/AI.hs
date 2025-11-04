@@ -7,25 +7,23 @@ import Data.Tuple(swap)
 
 import Logic 
 
-
+-- The entire gametree given a board
 data GameTree = Node Board [(Path,GameTree)]
 		deriving (Show, Eq)
 
-
+-- Boards/states as nodes, actions as edges
 data Path = Nil | NodePath { action :: Maybe Action ,
 				   currentState :: Board,
 				   nextNode :: Path
 					} deriving (Show, Eq)
 
-{-
-lazy buildTree 
--}
 
+-- buildTree lazily builds a gametree given a board and the current path
 buildTree :: Board -> Path -> GameTree 
 buildTree board currentPath = Node board [(newPath, buildTree b' newPath) 
 										  | action <- actions board, 
-										    Just b' <- [result board action], 
-											let newPath = buildPath currentPath action]
+										    Just b' <- [result board action], -- the list of boards resulting from applying the actions in actions board to the current board
+											let newPath = buildPath currentPath action] 
 			
 buildPath :: Path -> Action -> Path
 buildPath path act = NodePath (Just act) newState path
@@ -35,7 +33,7 @@ buildPath path act = NodePath (Just act) newState path
                  NodePath _ s _ -> s
     newState = if isNothing (result oldState act) then oldState else fromJust (result oldState act)
 
-
+-- Selects the first action on a path
 firstAction :: Path -> Maybe Action
 firstAction path = action path
 
@@ -53,18 +51,20 @@ minimax (Node board children) path | terminal board = (utility board, NodePath N
 							  | player board == X = maximumBy fstWithPath childResults
 							  | player board == O = minimumBy fstWithPath childResults
 	where 
-		childResults = 
+		childResults = -- a list of (Int, Path) pairs that result from applying minimax to the childstates
 			[let (score, childPath) = minimax subTree (buildPath path ( fromJust $ action pat))
 			 in (score, NodePath (action pat) board childPath)
 			| (pat, subTree) <- children]
 
-
+-- Returns the ordering between the integer x and the integer y. > if x > y and < if x < y.
 fstWithPath :: (Int, Path) -> (Int, Path) -> Ordering
 fstWithPath (x, _) (y, _) = compare x y
 
+-- returns the (Int, Path) with the highest Int value
 maximumBy :: (a -> a -> Ordering) -> [a] -> a
 maximumBy cmp = foldl1 (\x y -> if cmp x y == GT then x else y)
 
+-- returns the (Int, Path) with the lowest value
 minimumBy :: (a -> a -> Ordering) -> [a] -> a
 minimumBy cmp = foldl1 (\x y -> if cmp x y == LT then x else y)
 
