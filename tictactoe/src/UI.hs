@@ -45,7 +45,7 @@ drawBoard board =
       | otherwise = Blank
 
 
--- | Draws the 3x3 grid
+--  Draws the 3x3 grid
 drawGrid :: Picture
 drawGrid = color black $
   Pictures [ line [(-150, 50), (150, 50)]
