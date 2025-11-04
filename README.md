@@ -4,7 +4,7 @@ Play against an AI that is unbeatable at tic-tac-toe (noughts and crosses). Leve
 
 # How to Use
 
-Download the folder tictactoe from this repository. If you have stack installed, cd into tictactoe in the terminal and run:
+Download the folder tictactoe from this repository. If you have stack installed, cd into tictactoe in the terminal and enter:
 
 ``` zsh
 stack run
