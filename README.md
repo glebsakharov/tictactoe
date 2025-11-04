@@ -4,8 +4,9 @@ Play against an AI that is unbeatable at tic-tac-toe (noughts and crosses). Leve
 
 # How to Use
 
-Download the folder tictactoe from this repository. If you have stack installed, navigate to the root of this directory and run:
+Download the folder tictactoe from this repository. If you have stack installed, cd into tictactoe in the terminal and run:
 
 ``` zsh
 stack run
 ```
+From here, you are player one, or 'X'. Pick a square and play tic-tac-toe against the AI. Can you win? No, mathematically impossible, if I have done my job right.
