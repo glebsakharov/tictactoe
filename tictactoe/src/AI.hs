@@ -1,6 +1,6 @@
 module AI (firstAction,
-				   minimax,
-				   minimax') where 
+		   minimax,
+		   minimax') where 
 
 import Data.Maybe(isJust, fromJust, isNothing)
 import Data.Tuple(swap)
