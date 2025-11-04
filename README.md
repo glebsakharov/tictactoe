@@ -6,6 +6,6 @@ Play against an AI that is unbeatable at tic-tac-toe (noughts and crosses). Leve
 
 Download the folder tictactoe from this repository. If you have stack installed, navigate to the root of this directory and run:
 
-''' bash
+``` zsh
 stack run
-'''
+```
