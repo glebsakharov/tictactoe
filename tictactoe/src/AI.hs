@@ -31,7 +31,9 @@ buildPath path act = NodePath (Just act) newState path
     oldState = case path of
                  Nil -> initial_state
                  NodePath _ s _ -> s
-    newState = if isNothing (result oldState act) then oldState else fromJust (result oldState act)
+	newState = case result oldState act of 
+    						 Nothing -> oldState
+    						 Just b  -> b
 
 -- Selects the first action on a path
 firstAction :: Path -> Maybe Action
