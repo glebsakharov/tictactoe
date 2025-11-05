@@ -54,9 +54,9 @@ minimax (Node board children) path | terminal board = (utility board, NodePath N
 							  | player board == O = minimumBy fstWithPath childResults
 	where 
 		childResults = -- a list of (Int, Path) pairs that result from applying minimax to the childstates
-			[let (score, childPath) = minimax subTree (buildPath path ( fromJust $ action pat))
+			[let (score, childPath) = minimax subTree (buildPath path a)
 			 in (score, NodePath (action pat) board childPath)
-			| (pat, subTree) <- children]
+			| (pat, subTree) <- children, let Just a = action pat]
 
 -- Returns the ordering between the integer x and the integer y. > if x > y and < if x < y.
 fstWithPath :: (Int, Path) -> (Int, Path) -> Ordering
