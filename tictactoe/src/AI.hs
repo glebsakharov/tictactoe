@@ -14,7 +14,7 @@ data GameTree = Node Board [(Path,GameTree)]
 -- Boards/states as nodes, actions as edges
 data Path = Nil | NodePath { action :: Maybe Action ,
 				   currentState :: Board,
-				   nextNode :: Path
+				   prev :: Path
 					} deriving (Show, Eq)
 
 
